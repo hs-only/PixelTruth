@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try Fake Video Detection</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/check.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Header with Title and Navigation -->
+    <header>
+        <div class="container">
+            <h1>PixelTruth</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'check' %}">Test</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Our Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p>Upload a video to check if it's real or fake.</p>
+            <form id="videoForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit"><i class="fas fa-upload"></i> Upload & Test</button>
+            </form>
+            <div class="loading-section">
+                <div id="loading" style="display:none;">
+                    <i class="fas fa-spinner fa-spin"></i> Analyzing...
+                </div>
+                <div id="result">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="hero-images">
+            <div class="image-box">
+                <img src="https://th.bing.com/th/id/OIG1.yXzqqgIo68fjuHzoEJ5I?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 1">
+                <img src="https://th.bing.com/th/id/OIG1.B2msmWC2lsUS7wQAdqIY?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 2">
+                <img src="https://th.bing.com/th/id/OIG1.CV505Pbpv_E4mEu4jdGV?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 3">
+                <img src="https://th.bing.com/th/id/OIG1.B2msmWC2lsUS7wQAdqIY?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 4">
+            </div>
+        </div>
+    </section>
+
+    <!-- <footer>
+        <div class="container">
+            <p>&copy; 2024 PixelTruth. All rights reserved.</p>
+        </div>
+    </footer> -->
+
+    <script>
+        $(document).ready(function(){
+            $('#videoForm').on('submit', function(event){
+                event.preventDefault();
+
+                var formData = new FormData(this);
+
+                $('#loading').show();
+                $('#result').html('');
+
+                $.ajax({
+                    url: "{% url 'check' %}",
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#loading').hide();
+                        $('#result').html(
+                            '<h2>Result:</h2><p><strong>Class:</strong> ' + response.result['target'] + '</p>' +
+                            '<p><strong>Probability:</strong> ' + response.result['probability'] + '</p>'
+                        );
+                    },
+                    error: function(response) {
+                        $('#loading').hide();
+                        $('#result').html('<p class="error">An error occurred. Please try again.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/Application/myproject/check/lstm-model/
+# Ignore the virtual environment directory
+/Application/myenv/
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore environment files
+.env
+.venv/
+
+# Ignore Django migrations and database files
+/Application/myproject/db.sqlite3
+/Application/myproject/check/migrations/
+/Application/myproject/home/migrations/
+# Ignore IDE/editor configurations
+.idea/
+.vscode/
+.DS_Store
+
+# Ignore log files
+*.log

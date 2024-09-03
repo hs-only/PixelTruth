@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelTruth: Detecting Digital Deception</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>PixelTruth</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'check' %}">Test</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Our Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Detect and Protect</h2>
+            <p>Our AI-powered solution helps you identify deepfake videos with high accuracy, ensuring authenticity and trust.</p>
+            <a href="{% url 'check' %}" class="btn">Get Started</a>
+        </div>
+        <div class="hero-images">
+            <div class="image-box">
+                <img src="https://th.bing.com/th/id/OIG1.yXzqqgIo68fjuHzoEJ5I?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 1">
+                <img src="https://th.bing.com/th/id/OIG1.B2msmWC2lsUS7wQAdqIY?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 2">
+                <img src="https://th.bing.com/th/id/OIG1.CV505Pbpv_E4mEu4jdGV?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 3">
+                <img src="https://th.bing.com/th/id/OIG1.B2msmWC2lsUS7wQAdqIY?w=270&h=270&c=6&r=0&o=5&pid=ImgGn" alt="Image 4">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PixelTruth. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
